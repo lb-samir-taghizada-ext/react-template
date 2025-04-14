@@ -1,7 +1,7 @@
 export const App = () => {
   return (
     <div>
-      Test
+      Test for pull request
     </div>
   )
 }
