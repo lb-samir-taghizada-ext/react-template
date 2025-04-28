@@ -1,7 +1,5 @@
+import {RootNavigation} from "./navigation"
+
 export const App = () => {
-  return (
-    <div>
-      Test for pull request
-    </div>
-  )
+  return <RootNavigation />
 }
