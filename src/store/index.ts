@@ -1,14 +1,19 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
-import {productsReducer} from "./products";
-import {userReducer} from "./user";
-import {thunk} from 'redux-thunk'
+// import {userReducer} from "./user";
+import {configureStore} from "@reduxjs/toolkit";
+import productsReducer, {factsApi} from './products/slice';
 
-const rootReducer = combineReducers({
+const rootReducer = {
+  // user: userReducer,
   products: productsReducer,
-  user: userReducer,
-})
+  [factsApi.reducerPath]: factsApi.reducer,
+}
 
-export const store = createStore(rootReducer, applyMiddleware(thunk))
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware(getDefaultMiddleware) {
+    return getDefaultMiddleware().concat(factsApi.middleware)
+  },
+})
 
 export type AppStore = typeof store
 export type RootState = ReturnType<AppStore['getState']>
